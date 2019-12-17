@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Treasure of Travel</string>
     <string name="crime_title_label">Title</string>
+    <string name="menu_add">Add</string>
 </resources>

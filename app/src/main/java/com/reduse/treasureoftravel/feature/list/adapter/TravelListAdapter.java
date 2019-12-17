@@ -1,4 +1,4 @@
-package com.reduse.treasureoftravel;
+package com.reduse.treasureoftravel.feature.list.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.reduse.treasureoftravel.R;
 import com.reduse.treasureoftravel.model.Travel;
 
 import java.util.List;

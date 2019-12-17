@@ -1,4 +1,4 @@
-package com.reduse.treasureoftravel;
+package com.reduse.treasureoftravel.feature.details;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.reduse.treasureoftravel.R;
 import com.reduse.treasureoftravel.model.Travel;
 import com.reduse.treasureoftravel.model.TravelStore;
 

@@ -1,10 +1,13 @@
-package com.reduse.treasureoftravel;
+package com.reduse.treasureoftravel.feature.list;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
 
 import android.os.Bundle;
+
+import com.reduse.treasureoftravel.R;
+import com.reduse.treasureoftravel.feature.list.TravelListFragment;
 
 
 public class TravelActivityList extends AppCompatActivity {

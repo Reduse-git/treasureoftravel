@@ -9,8 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".TravelActivity"></activity>
-        <activity android:name=".TravelActivityList">
+        <activity android:name=".feature.details.TravelActivity"></activity>
+        <activity android:name=".feature.list.TravelActivityList">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

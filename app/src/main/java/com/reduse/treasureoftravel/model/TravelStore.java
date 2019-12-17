@@ -1,7 +1,10 @@
 package com.reduse.treasureoftravel.model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Random;
+import java.util.Set;
 import java.util.UUID;
 
 public class TravelStore {
@@ -34,7 +37,35 @@ public class TravelStore {
         return null;
     }
 
+    public void generateRandomTravel() {
+        Random random = new Random();
 
+        Travel crime = new Travel();
+
+        crime.setTitle("Travel #" + random.nextInt());
+
+
+        travels.add(crime);
+        notifyListeners();
+    }
+    private void notifyListeners() {
+        for (Listener listener : listenersSet) {
+            listener.onTravelListChanged();
+        }
+    }
+    private final Set<Listener> listenersSet = new HashSet<>();
+
+    public void addListener(Listener listener) {
+        listenersSet.add(listener);
+    }
+
+    public void removeListener(Listener listener) {
+        listenersSet.remove(listener);
+    }
+
+    public interface Listener {
+        void onTravelListChanged();
+    }
 
 }
 

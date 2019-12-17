@@ -1,4 +1,4 @@
-package com.reduse.treasureoftravel;
+package com.reduse.treasureoftravel.feature.details;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
@@ -6,6 +6,9 @@ import androidx.fragment.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+
+import com.reduse.treasureoftravel.R;
+import com.reduse.treasureoftravel.feature.list.TravelActivityList;
 
 import java.util.UUID;
 

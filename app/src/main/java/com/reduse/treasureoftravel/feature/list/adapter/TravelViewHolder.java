@@ -1,4 +1,4 @@
-package com.reduse.treasureoftravel;
+package com.reduse.treasureoftravel.feature.list.adapter;
 
 import android.view.View;
 import android.widget.TextView;
@@ -6,6 +6,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.reduse.treasureoftravel.R;
+import com.reduse.treasureoftravel.feature.list.adapter.TravelListAdapter;
 import com.reduse.treasureoftravel.model.Travel;
 
 public class TravelViewHolder extends RecyclerView.ViewHolder {
