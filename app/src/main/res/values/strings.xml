@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Treasure of Travel</string>
+    <string name="crime_title_label">Title</string>
 </resources>
