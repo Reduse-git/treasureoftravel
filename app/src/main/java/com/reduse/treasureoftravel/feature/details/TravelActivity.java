@@ -8,12 +8,12 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.reduse.treasureoftravel.R;
-import com.reduse.treasureoftravel.feature.list.TravelActivityList;
 
 import java.util.UUID;
 
 public class TravelActivity extends AppCompatActivity {
     private static final String KEY_ID = "key_id";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,8 +30,9 @@ public class TravelActivity extends AppCompatActivity {
                     .commit();
         }
     }
+
     public static Intent makeIntent(Context context, UUID travelId) {
-        Intent intent = new Intent(context, TravelActivityList.class);
+        Intent intent = new Intent(context, TravelActivity.class);
         intent.putExtra(KEY_ID, travelId);
         return intent;
     }

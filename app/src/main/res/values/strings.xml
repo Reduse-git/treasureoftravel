@@ -2,4 +2,9 @@
     <string name="app_name">Treasure of Travel</string>
     <string name="crime_title_label">Title</string>
     <string name="menu_add">Add</string>
+    <string name="crime_title_hint">title</string>
+    <string name="open_map">Open map</string>
+    <string name="button_for_map">Open</string>
+    <string name="snackbar_action">Undo</string>
+    <string name="snackbar_message">Item was deleted</string>
 </resources>

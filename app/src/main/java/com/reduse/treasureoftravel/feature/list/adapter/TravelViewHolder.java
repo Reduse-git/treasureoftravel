@@ -7,7 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.reduse.treasureoftravel.R;
-import com.reduse.treasureoftravel.feature.list.adapter.TravelListAdapter;
+
 import com.reduse.treasureoftravel.model.Travel;
 
 public class TravelViewHolder extends RecyclerView.ViewHolder {
@@ -16,17 +16,30 @@ public class TravelViewHolder extends RecyclerView.ViewHolder {
     private Travel travel;
     private TravelListAdapter.ItemListener itemListener;
 
+    private final View.OnClickListener clickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            itemListener.onCrimeClicked(travel);
+        }
+    };
+
     public TravelViewHolder(@NonNull View itemView, TravelListAdapter.ItemListener itemListener) {
         super(itemView);
 
         titleView = itemView.findViewById(R.id.title);
+
+        itemView.setOnClickListener(clickListener);
+
+        this.itemListener = itemListener;
     }
+
     public void bindTo(Travel travel) {
         this.travel = travel;
 
         titleView.setText(travel.getTitle());
 
     }
+
     public Travel getTravel() {
         return travel;
     }

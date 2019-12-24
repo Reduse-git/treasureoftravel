@@ -10,9 +10,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.reduse.treasureoftravel.R;
 import com.reduse.treasureoftravel.model.Travel;
 
+import java.util.Collections;
 import java.util.List;
 
-public class TravelListAdapter extends RecyclerView.Adapter<TravelViewHolder> {
+public class TravelListAdapter extends RecyclerView.Adapter<TravelViewHolder> implements ItemTouchHelperAdapter{
 
     private List<Travel> travels;
     private ItemListener itemListener;
@@ -54,6 +55,26 @@ public class TravelListAdapter extends RecyclerView.Adapter<TravelViewHolder> {
         void onCrimeClicked(Travel travel);
 
         void onCrimeLongClicked(Travel travel);
+    }
+    @Override
+    public void onItemDismiss(int position) {
+       travels.remove(position);
+        notifyItemRemoved(position);
+    }
+
+    @Override
+    public void onItemMove(int fromPosition, int toPosition) {
+        if (fromPosition < toPosition) {
+            for (int i = fromPosition; i < toPosition; i++) {
+                Collections.swap(travels, i, i + 1);
+            }
+        } else {
+            for (int i = fromPosition; i > toPosition; i--) {
+                Collections.swap(travels, i, i - 1);
+            }
+        }
+        notifyItemMoved(fromPosition, toPosition);
+
     }
 
 }

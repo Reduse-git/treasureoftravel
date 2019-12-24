@@ -39,19 +39,30 @@ public class TravelStore {
 
     public void generateRandomTravel() {
         Random random = new Random();
-
+        for (int i = 0; i < 1; i++) {
         Travel crime = new Travel();
 
         crime.setTitle("Travel #" + random.nextInt());
 
-
         travels.add(crime);
+        }
         notifyListeners();
     }
+    public void deleteTravel(Travel travel) {
+        travels.remove(travel);
+        notifyListeners();
+    }
+
     private void notifyListeners() {
         for (Listener listener : listenersSet) {
             listener.onTravelListChanged();
+
+
         }
+    }
+    public void resurrectTravel(Travel travel, int position) {
+        travels.add(position, travel);
+        notifyListeners();
     }
     private final Set<Listener> listenersSet = new HashSet<>();
 

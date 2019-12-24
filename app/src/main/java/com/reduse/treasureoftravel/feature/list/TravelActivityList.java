@@ -7,7 +7,7 @@ import androidx.fragment.app.FragmentManager;
 import android.os.Bundle;
 
 import com.reduse.treasureoftravel.R;
-import com.reduse.treasureoftravel.feature.list.TravelListFragment;
+
 
 
 public class TravelActivityList extends AppCompatActivity {
