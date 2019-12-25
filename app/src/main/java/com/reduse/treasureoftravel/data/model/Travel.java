@@ -1,4 +1,4 @@
-package com.reduse.treasureoftravel.model;
+package com.reduse.treasureoftravel.data.model;
 
 
 import android.media.Image;
@@ -11,7 +11,7 @@ public class Travel {
 
     private UUID id;
     private String title;
-    private Set<Image> imagesLib;
+  //  private Set<Image> imagesLib;
     private Date date;
     private String description;
 
@@ -34,15 +34,16 @@ public class Travel {
     public Travel() {
         id = UUID.randomUUID();
         title = id.toString();
+        date = new Date();
     }
 
-    public Set<Image> getImagesLib() {
+   /* public Set<Image> getImagesLib() {
         return imagesLib;
-    }
+    }*/
 
-    public void setImagesLib(Set<Image> imagesLib) {
+   /* public void setImagesLib(Set<Image> imagesLib) {
         this.imagesLib = imagesLib;
-    }
+    }*/
 
     public UUID getId() {
         return id;

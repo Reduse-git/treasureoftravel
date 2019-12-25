@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.reduse.treasureoftravel.R;
 
-import com.reduse.treasureoftravel.model.Travel;
+import com.reduse.treasureoftravel.data.model.Travel;
 
 public class TravelViewHolder extends RecyclerView.ViewHolder {
 
@@ -19,7 +19,7 @@ public class TravelViewHolder extends RecyclerView.ViewHolder {
     private final View.OnClickListener clickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            itemListener.onCrimeClicked(travel);
+            itemListener.onTravelClicked(travel);
         }
     };
 

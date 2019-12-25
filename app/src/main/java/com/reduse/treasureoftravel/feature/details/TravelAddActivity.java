@@ -5,11 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
+
 
 import com.reduse.treasureoftravel.R;
 
-import java.util.UUID;
 
 public class TravelAddActivity  extends AppCompatActivity {
     private static final String KEY_ID = "key_id";

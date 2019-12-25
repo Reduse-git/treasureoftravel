@@ -8,9 +8,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.reduse.treasureoftravel.R;
-import com.reduse.treasureoftravel.model.Travel;
+import com.reduse.treasureoftravel.data.model.Travel;
 
-import java.util.Collections;
 import java.util.List;
 
 public class TravelListAdapter extends RecyclerView.Adapter<TravelViewHolder> {
@@ -50,9 +49,12 @@ public class TravelListAdapter extends RecyclerView.Adapter<TravelViewHolder> {
         return travels.size();
     }
 
-
+    public void submitList(List<Travel> newList) {
+        this.travels = newList;
+        notifyDataSetChanged();
+    }
     public interface ItemListener {
-        void onCrimeClicked(Travel travel);
+        void onTravelClicked(Travel travel);
 
         void onCrimeLongClicked(Travel travel);
     }

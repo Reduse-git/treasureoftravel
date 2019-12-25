@@ -13,8 +13,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.reduse.treasureoftravel.R;
-import com.reduse.treasureoftravel.model.Travel;
-import com.reduse.treasureoftravel.model.TravelStore;
+import com.reduse.treasureoftravel.data.TravelStoreProvider;
+import com.reduse.treasureoftravel.data.model.Travel;
 
 import java.util.UUID;
 
@@ -34,7 +34,7 @@ public class TravelFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         UUID id = (UUID) getArguments().getSerializable(KEY_TRAVEL_ID);
-        travel = TravelStore.getInstance().getById(id);
+        travel = TravelStoreProvider.getInstance(getContext()).getById(id);
     }
 
     @Nullable
@@ -67,6 +67,7 @@ public class TravelFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 travel.setTitle(s.toString());
+                saveTravelObject();
             }
 
             @Override
@@ -75,7 +76,9 @@ public class TravelFragment extends Fragment {
             }
         });
     }
-
+    private void saveTravelObject(){
+        TravelStoreProvider.getInstance(getContext()).update(travel);
+    }
     public static TravelFragment makeInstance(UUID id) {
         TravelFragment fragment = new TravelFragment();
         Bundle args = new Bundle();

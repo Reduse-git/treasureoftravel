@@ -24,11 +24,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.reduse.treasureoftravel.R;
+import com.reduse.treasureoftravel.data.TravelStoreProvider;
 import com.reduse.treasureoftravel.feature.details.TravelActivity;
 import com.reduse.treasureoftravel.feature.list.adapter.TravelListAdapter;
 import com.reduse.treasureoftravel.feature.list.adapter.TravelViewHolder;
-import com.reduse.treasureoftravel.model.Travel;
-import com.reduse.treasureoftravel.model.TravelStore;
+import com.reduse.treasureoftravel.data.model.Travel;
+import com.reduse.treasureoftravel.data.TravelStore;
+
+import java.util.List;
 
 public class TravelListFragment extends Fragment {
 
@@ -65,24 +68,11 @@ public class TravelListFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        adapter = new TravelListAdapter(TravelStore.getInstance().getTravels(), itemListener);
+        adapter = new TravelListAdapter(TravelStoreProvider.getInstance(getContext()).getTravel(), itemListener);
 
         recyclerView.setAdapter(adapter);
 
-        /*ItemTouchHelper touchHelper = new ItemTouchHelper(
-                new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
-                    @Override
-                    public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-                        return false;
-                    }
 
-                    @Override
-                    public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                        TravelViewHolder travelViewHolder = (TravelViewHolder) viewHolder;
-                        Travel travel = travelViewHolder.getTravel();
-                        deleteItem(travel, viewHolder.getAdapterPosition());
-                    }
-                });*/
         ItemTouchHelper touchHelper = new ItemTouchHelper(new ItemTouchHelper.Callback() {
 
             boolean viewBeingCleared;
@@ -173,12 +163,12 @@ public class TravelListFragment extends Fragment {
 
 
     private void deleteItem(final Travel travel, final int position) {
-        TravelStore.getInstance().deleteTravel(travel);
+        TravelStoreProvider.getInstance(getContext()).deleteTravel(travel);
        Snackbar.make(recyclerView, R.string.snackbar_message, Snackbar.LENGTH_LONG)
                 .setAction(R.string.snackbar_action, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        TravelStore.getInstance().resurrectTravel(travel, position);
+                        TravelStoreProvider.getInstance(getContext()).resurrectTravel(travel, position);
                     }
                 })
                 .show();
@@ -192,7 +182,7 @@ public class TravelListFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.add) {
-            TravelStore.getInstance().generateRandomTravel();
+            TravelStoreProvider.getInstance(getContext()).generateRandomTravel();
            /* Intent intent = TravelAddActivity.makeIntent(getContext());
             startActivity(intent);*/
             return true;
@@ -204,27 +194,30 @@ public class TravelListFragment extends Fragment {
     private final TravelStore.Listener travelListChangedListener = new TravelStore.Listener() {
         @Override
         public void onTravelListChanged() {
-            adapter.notifyDataSetChanged();
+           updateList();
         }
     };
 
     @Override
     public void onResume() {
         super.onResume();
-        TravelStore.getInstance().addListener(travelListChangedListener);
-        adapter.notifyDataSetChanged();
+        TravelStoreProvider.getInstance(getContext()).addListener(travelListChangedListener);
+        updateList();
     }
 
     @Override
     public void onPause() {
-        TravelStore.getInstance().removeListener(travelListChangedListener);
+        TravelStoreProvider.getInstance(getContext()).removeListener(travelListChangedListener);
         super.onPause();
     }
 
-
+    private void updateList(){
+        List<Travel> travels = TravelStoreProvider.getInstance(getContext()).getTravel();
+        adapter.submitList(travels);
+    }
     private final TravelListAdapter.ItemListener itemListener = new TravelListAdapter.ItemListener() {
         @Override
-        public void onCrimeClicked(Travel travel) {
+        public void onTravelClicked(Travel travel) {
             Intent intent = TravelActivity.makeIntent(getContext(), travel.getId());
             startActivity(intent);
         }
