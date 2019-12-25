@@ -27,6 +27,7 @@ public abstract class BaseTravelStore implements TravelStore {
     public void addListener(Listener listener) {
         listenerSet.add(listener);
     }
+
     protected static Travel makeRandomTravel() {
         Random random = new Random();
         Travel travel = new Travel();

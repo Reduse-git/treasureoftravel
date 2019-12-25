@@ -26,6 +26,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.reduse.treasureoftravel.R;
 import com.reduse.treasureoftravel.data.TravelStoreProvider;
 import com.reduse.treasureoftravel.feature.details.TravelActivity;
+import com.reduse.treasureoftravel.feature.details.TravelAddActivity;
 import com.reduse.treasureoftravel.feature.list.adapter.TravelListAdapter;
 import com.reduse.treasureoftravel.feature.list.adapter.TravelViewHolder;
 import com.reduse.treasureoftravel.data.model.Travel;
@@ -182,9 +183,9 @@ public class TravelListFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.add) {
-            TravelStoreProvider.getInstance(getContext()).generateRandomTravel();
-           /* Intent intent = TravelAddActivity.makeIntent(getContext());
-            startActivity(intent);*/
+            //TravelStoreProvider.getInstance(getContext()).generateRandomTravel();
+            Intent intent = new Intent(getContext(),TravelAddActivity.class);
+            startActivity(intent);
             return true;
         } else {
             return super.onOptionsItemSelected(item);
