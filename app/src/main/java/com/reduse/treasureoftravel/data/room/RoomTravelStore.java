@@ -76,4 +76,9 @@ public class RoomTravelStore extends BaseTravelStore {
         travelDao.update(Converter.convert(travel));
         notifyListeners();
     }
+    @Override
+    public  void insert(Travel travel){
+        travelDao.add(Converter.convert(travel));
+        notifyListeners();
+    }
 }

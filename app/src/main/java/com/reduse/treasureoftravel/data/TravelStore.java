@@ -19,7 +19,7 @@ public interface TravelStore {
     void resurrectTravel(Travel travel, int position);
 
     void update(Travel travel);
-
+    void insert(Travel travel);
     void addListener(Listener listener);
 
     void removeListener(Listener listener);

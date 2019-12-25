@@ -20,7 +20,7 @@ import java.util.UUID;
 
 public class TravelFragment extends Fragment {
 
-    private static final String KEY_TRAVEL_ID = "key_crime_id";
+    private static final String KEY_TRAVEL_ID = "key_travel_id";
 
     //model
     private Travel travel;
@@ -47,7 +47,7 @@ public class TravelFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        titleEditText = view.findViewById(R.id.crime_title);
+        titleEditText = view.findViewById(R.id.travel_title);
 
     }
 

@@ -7,4 +7,7 @@
     <string name="button_for_map">Open</string>
     <string name="snackbar_action">Undo</string>
     <string name="snackbar_message">Item was deleted</string>
+    <string name="title_add">Title</string>
+    <string name="save_button">Save</string>
+    <string name="description_add">Description</string>
 </resources>
