@@ -3,7 +3,6 @@ package com.reduse.treasureoftravel.feature.list;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -17,6 +16,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -25,8 +25,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.snackbar.Snackbar;
 import com.reduse.treasureoftravel.R;
 import com.reduse.treasureoftravel.feature.details.TravelActivity;
-import com.reduse.treasureoftravel.feature.details.TravelAddActivity;
-import com.reduse.treasureoftravel.feature.list.adapter.ItemTouchHelperAdapter;
 import com.reduse.treasureoftravel.feature.list.adapter.TravelListAdapter;
 import com.reduse.treasureoftravel.feature.list.adapter.TravelViewHolder;
 import com.reduse.treasureoftravel.model.Travel;
@@ -57,9 +55,11 @@ public class TravelListFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.recycler);
     }
+
     private Drawable deleteDrawable;
     private int intrinsicWidth;
     private int intrinsicHeight;
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -85,6 +85,11 @@ public class TravelListFragment extends Fragment {
                 });*/
         ItemTouchHelper touchHelper = new ItemTouchHelper(new ItemTouchHelper.Callback() {
 
+            boolean viewBeingCleared;
+            @Override
+            public float getSwipeEscapeVelocity(float defaultValue) {
+                return super.getSwipeEscapeVelocity(4f);
+            }
 
             @Override
             public int getMovementFlags(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
@@ -101,6 +106,7 @@ public class TravelListFragment extends Fragment {
                 return true;
             }
 
+
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 TravelViewHolder travelViewHolder = (TravelViewHolder) viewHolder;
@@ -109,7 +115,7 @@ public class TravelListFragment extends Fragment {
             }
 
             @Override
-            public void onChildDrawOver(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+            public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
                 if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
 
                     final float alpha = ALPHA_FULL - Math.abs(dX) / (float) viewHolder.itemView.getWidth();
@@ -122,7 +128,7 @@ public class TravelListFragment extends Fragment {
                     background.setBounds(0, viewHolder.itemView.getTop(), viewHolder.itemView.getLeft() + dx, viewHolder.itemView.getBottom());
 
                     background.draw(c);
-                    deleteDrawable = ContextCompat.getDrawable(recyclerView.getContext(), R.drawable.my_icon);
+                    deleteDrawable = ContextCompat.getDrawable(recyclerView.getContext(), R.drawable.ic_delete);
                     intrinsicWidth = deleteDrawable.getIntrinsicWidth();
                     intrinsicHeight = deleteDrawable.getIntrinsicHeight();
 
@@ -136,10 +142,19 @@ public class TravelListFragment extends Fragment {
                     deleteDrawable.setBounds(deleteIconLeft, deleteIconTop, deleteIconRight, deleteIconBottom);
                     deleteDrawable.draw(c);
 
-
                 } else {
                     super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+
+
                 }
+
+            }
+
+            @Override
+            public void clearView(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
+                super.clearView(recyclerView, viewHolder);
+                ViewCompat.setElevation(viewHolder.itemView, 0);
+                viewBeingCleared = true;
             }
 
             @Override
@@ -157,10 +172,9 @@ public class TravelListFragment extends Fragment {
     }
 
 
-
     private void deleteItem(final Travel travel, final int position) {
         TravelStore.getInstance().deleteTravel(travel);
-        Snackbar.make(recyclerView, R.string.snackbar_message, Snackbar.LENGTH_LONG)
+       Snackbar.make(recyclerView, R.string.snackbar_message, Snackbar.LENGTH_LONG)
                 .setAction(R.string.snackbar_action, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
